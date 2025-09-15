@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1><span>Mani's DRIVE's</span><br>CAR RENTAL <span>IN PUNE</span></h1>
+      <p>Safe | Reliable | Affordable</p>
+    </div>
+    <div class="hero.image">
+    <img src="{% static 'images/Fortuner 2.png' %}" alt="Car" class="car-img">
+    </div>
+  </section>
+
+  <!-- Search Bar -->
+  <!-- <section class="search-bar">
+  <form method="GET" action="/ourcars" class="d-flex flex-wrap gap-3 align-items-end">
+    
+    <div class="search-item">
+      <label><b>Your nearest area</b></label>
+      <select name="location" required>
+        <option value="Pimpri Chinchwad">Pimpri Chinchwad</option>
+        <option value="Pune Cantonment">Pune Cantonment</option>
+        <option value="Kothrud">Kothrud</option>
+        <option value="Hadapsar">Hadapsar</option>
+        <option value="Lonavala">Lonavala</option>
+      </select>
+    </div>
+    <div class="search-item">
+      <label><b>Pickup Date</b></label>
+      <input type="date" name="pickup_date"required>
+    </div>
+    <div class="search-item">
+      <label><b>Pickup Time</b></label>
+      <input type="time" name="pickup_time" required>
+    </div>
+    <div class="search-item">
+      <label><b>Drop Date</b></label>
+      <input type="date" name="drop_date" required>
+    </div>
+    <div class="search-item">
+      <label><b>Drop Time</b></label>
+      <input type="time" name="drop_time" required>
+    </div>
+    <div class="search-item">
+      <button type="submit" class="btn btn-dark search-btn">Search</button>
+    </div>
+  </form>
+</section> -->
+
+  <div style="text-align: center; text-decoration:underline; font-family: sans-serif; font-style: oblique; padding-top: 50px;"><b>Our Top Selling Car's</b></div>
+    <!-- Thar Card -->
+    <div class="container my-3">
+  <div class="row g-3 justify-content-center">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card w-100 bg-dark h-100">
+            <img src="{% static 'images/thar 4x4.jpg' %}" class="car-img h-100" alt="">
+            <div class="card-body p-2">
+              <div class="car-title text-center text-white">THAR</div>
+              <div class="price text-success fw-bold">₹ 2500</div>
+              <div class="car-brand text-white">Mahindra</div>
+              <div class="category text-white">SUV</div>
+              <div class="car-info text-white fw-bold">
+                ⛽Fuel: Diesel<br>
+                ⚙ Transmission: Manual
+              </div>
+              <div class="seats text-white">🪑4 Seater</div>
+              <a href="/ourcars" class="btn btn-primary mt-auto w-100 ">See Details</a>
+            </div>
+          </div>
+        </div>
+
+
+    <!-- Fortuner Card -->
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card car-card w-100 bg-dark">
+            <img src="{% static 'images/Fortuner.jpg' %}" class="car-img h-100" alt="">
+            <div class="card-body p-2">
+              <div class="car-title text-center text-white">Fortuner</div>
+              <div class="price text-success fw-bold">₹ 3800</div>
+              <div class="car-brand text-white">Toyata</div>
+              <div class="category text-white">SUV</div>
+              <div class="car-info text-white fw-bold">
+                ⛽Fuel: Diesel<br>
+                ⚙ Transmission: Automatic
+              </div>
+              <div class="seats text-white">🪑7 Seater</div>
+              <a href="/ourcars" class="btn btn-primary mt-2 w-100">See Details</a>
+            </div>
+          </div>
+        </div>
+
+<!-- E-Class -->
+<div class="col-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card car-card w-100 bg-dark">
+            <img src="{% static 'images/e-class.jpg' %}" class="car-img " alt="">
+            <div class="card-body p-2">
+              <div class="car-title text-center text-white">E-Class</div>
+              <div class="price text-success fw-bold">₹ 5000</div>
+              <div class="car-brand text-white">Mercedes</div>
+              <div class="category text-white">Luxury</div>
+              <div class="car-info text-white fw-bold">
+                ⛽Fuel: Diesel<br>
+                ⚙ Transmission: Automatic
+              </div>
+              <div class="seats text-white">🪑4 Seater</div>
+              <a href="/ourcars" class="btn btn-primary mt-2 w-100">See Details</a>
+            </div>
+          </div>
+        </div>
+
+
+    <!-- i20 Card -->
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card car-card w-100 bg-dark">
+            <img src="{% static 'images/hi20.jpg' %}" class="car-img h-100" alt="">
+            <div class="card-body p-2">
+              <div class="car-title text-center text-white">i20</div>
+              <div class="price text-success fw-bold">₹ 2000</div>
+              <div class="car-brand text-white">Hyundai</div>
+              <div class="category text-white">Hatchback</div>
+              <div class="car-info text-white fw-bold">
+                ⛽Fuel: Diesel<br>
+                ⚙ Transmission: Manual
+              </div>
+              <div class="seats text-white">🪑4 Seater</div>
+              <a href="/ourcars" class="btn btn-primary mt-2 w-100">See Details</a>
+            </div>
+          </div>
+        </div>
+
+<!-- Scorpio Classic -->
+<div class="col-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card car-card w-100 bg-dark">
+            <img src="{% static 'images/scorpio.jpg' %}" class="car-img h-100" alt="">
+            <div class="card-body p-2">
+              <div class="car-title text-center text-white">Scorpio</div>
+              <div class="price text-success fw-bold">₹ 3600</div>
+              <div class="car-brand text-white">Mahindra</div>
+              <div class="category text-white">SUV</div>
+              <div class="car-info text-white fw-bold">
+                ⛽Fuel: Petrol<br>
+                ⚙ Transmission: Manual
+              </div>
+              <div class="seats text-white">🪑7 Seater</div>
+              <a href="/ourcars" class="btn btn-primary mt-2 w-100">See Details</a>
+            </div>
+          </div>
+        </div>
+<!-- Dzire -->
+     <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card car-card w-100 bg-dark">
+            <img src="{% static 'images/dzire.jpg' %}" class="car-img h-100" alt="">
+            <div class="card-body p-2">
+              <div class="car-title text-center text-white">Swift Dzire</div>
+              <div class="price text-success fw-bold">₹ 2000</div>
+              <div class="car-brand text-white">Maruti Suzuki</div>
+              <div class="category text-white">Sedan</div>
+              <div class="car-info text-white fw-bold">
+                ⛽Fuel: Petrol<br>
+                ⚙ Transmission: Manual
+              </div>
+              <div class="seats text-white">🪑4 Seater</div>
+              <a href="/ourcars" class="btn btn-primary mt-2 w-100">See Details</a>
+            </div>
+          </div>
+        </div>
+
+<section style="background-color: #0d6efd; color: white; padding: 4rem 0; text-align: center;">
+  <div class="container">
+    <h2 class="mb-4" style="font-weight: bold; color: #111;">What Our Customers Say</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <p>“Very reliable and easy booking experience.”<br><span style="font-size: 0.9rem; color: #d1d1d1;">— Mani S.</span></p>
+      </div>
+      <div class="col-md-4">
+        <p>“Best Car-Rental service in Pune!”<br><span style="font-size: 0.9rem; color: #d1d1d1;">— Anjali K.</span></p>
+      </div>
+      <div class="col-md-4">
+        <p>“Cars were clean and in great condition.”<br><span style="font-size: 0.9rem; color: #d1d1d1;">— Rahul S.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div style=" text-align:center; padding:50px 20px;">
+  <h2 style="color:#260279; font-size:24px; font-weight:bold; margin-bottom:40px;">
+    Features & Benefits for Renting a car with Mani's Drive
+  </h2>
+
+  <div style="display:flex; justify-content:center; gap:40px; max-width:1000px; margin:0 auto; flex-wrap:wrap;">
+    
+    <div style="max-width:280px;">
+      <h5  style="font-style:italic; color:#333;">“Unlimited KM To Drive”</h5>
+    </div>
+
+    <div style="max-width:280px;">
+      <h5  style="font-style:italic; color:#333;">“Affordable Price”</h5>
+    </div>
+
+    <div style="max-width:280px;">
+      <h5  style="font-style:italic; color:#333;">“24X7 Customer Service”</h5>
+    </div>
+
+  </div>
+</div>
+
+</section>
+<section style="background-color: #ffc107; padding: 4rem 0; text-align: center;">
+  <div class="container">
+    <h2 style="font-weight: bold; color: #111;">Ready to Drive?</h2>
+    <p style="color: #222;">Book your ride now and enjoy a hassle-free experience.</p>
+    <a href="/ourcars" class="btn btn-dark mt-3">Get Started</a>
+  </div>
+</section>
+{% endblock %}

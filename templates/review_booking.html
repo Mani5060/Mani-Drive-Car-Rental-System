@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<style>
+    body {
+        padding-top: 50px;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 30px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .section {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background-color: #fdfdfd;
+    }
+
+    .section h3 {
+        color: #555;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+
+    .section p {
+        margin: 8px 0;
+        color: #444;
+    }
+
+    .car-image {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .actions {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: grey;
+        color: #fff;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin: 5px;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: black;
+    }
+
+    .btn-back {
+        background-color: grey;
+    }
+
+    .btn-back:hover {
+        background-color: black;
+    }
+
+    img.uploaded-file {
+        margin-top: 10px;
+        border-radius: 5px;
+        max-width: 100%;
+        max-height: 300px;
+    }
+</style>
+
+<div class="container">
+    <h2>Review Booking Details</h2>
+
+    <div class="section">
+        <h3>Car Details</h3>
+        {% if car.image %}
+            <img src="{{ car.image.url }}" alt="{{ car.name }}" class="car-image">
+        {% endif %}
+        <p><strong>Name:</strong> {{ car.name }}</p>
+        <p><strong>Brand:</strong> {{ car.brand }}</p>
+        <p><strong>Price per Day:</strong> ₹{{ car.price }}</p>
+        <p><strong>GST: </strong>{{GST}} (18%)</p>
+        <p><strong>Pickup Date:</strong> {{ booking.pickup_datetime }}</p>
+        <p><strong>Drop Date:</strong> {{ booking.drop_datetime }}</p>
+        <p><strong>No. of Days:</strong> {{ booking.no_of_days }}</p>
+        <p><strong>Total Amount(with GST):</strong> ₹{{ final_amount }}</p>
+    </div>
+
+    <div class="section">
+        <h3>Your Details</h3>
+        <p><strong>Name:</strong> {{ booking.customer_name }}</p>
+        <p><strong>Email:</strong> {{ booking.email }}</p>
+        <p><strong>Phone:</strong> {{ booking.mobile }}</p>
+        <p><strong>License No:</strong> {{ booking.license_no }}</p>
+        <p><strong>Address:</strong> {{ booking.address }}</p>
+    </div>
+
+    {% if booking.license_file %}
+    <div class="section">
+        <h3>Uploaded License</h3>
+        <a href="{{ booking.license_file.url }}" target="_blank">View File</a><br>
+       {% if booking.license_file.url|lower|slice:"-4:" in ".jpg,.png" %}
+    <img src="{{ booking.license_file.url }}" alt="License File" width="300">
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+    {% if booking.addhar_file %}
+    <div class="section">
+        <h3>Uploaded Addhar Card</h3>
+        <a href="{{ booking.addhar_file.url }}" target="_blank">View File</a><br>
+       {% if booking.addhar_file.url|lower|slice:"-4:" in ".jpg,.png" %}
+    <img src="{{ booking.addhar_file.url }}" alt="License File" width="300">
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+    <div class="actions">
+    <button id="rzp-button1" class="btn">Confirm Booking & Make Payment</button>
+    <a href="{% url 'booking' car.id %}" class="btn btn-back">Go Back & Edit</a>
+</div>
+
+<form id="payment-form" method="POST" action="{% url 'payment_success' %}">
+    {% csrf_token %}
+    <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+    <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+    <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+</form>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{ razorpay_key }}",
+    "amount": "{{ final_amount|floatformat:0 }}00", 
+    "currency": "INR",
+    "name": "Mani's Drive",
+    "description": "Car Booking Payment",
+    "order_id": "{{ payment.id }}", 
+    "handler": function (response){
+        document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+        document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+        document.getElementById('razorpay_signature').value = response.razorpay_signature;
+
+        document.getElementById('payment-form').submit();
+    },
+    "prefill": {
+        "name": "{{ booking.customer_name }}",
+        "email": "{{ booking.email }}",
+        "contact": "{{ booking.mobile }}"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+
+var rzp1 = new Razorpay(options);
+
+document.getElementById('rzp-button1').onclick = function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to confirm your booking and proceed to payment?")) {
+        rzp1.open();
+    }
+};
+</script>
+
+
+{% endblock %}

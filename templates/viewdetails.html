@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<style>
+  .car-image:hover {
+    background-color: grey;
+    transform: scale(1.05);
+    color: #fff;
+  }
+  .car-image {
+    height: 320px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .detail-heading {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .car-info p {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .badge-info {
+    display: inline-block;
+    background: #e0f7fa;
+    color: #00695c;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .price-box {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 8px;
+    margin: 12px 0;
+  }
+
+  .book-btn {
+    
+    text-decoration: solid;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  .book-btn:hover {
+  background-color: orange;
+  transform: scale(1.05);
+  color: #fff;
+}
+</style>
+
+<div class="container mt-5 pt-4">
+    <div class="row bg-light p-4 rounded border-top shadow-sm">
+        <div class="col-md-6 mb-4 ">
+            <img src="{{ car.cimage.url }}" alt="{{ car.name }}" class="car-image">
+        </div>
+
+        <div class="col-md-6 car-info">
+            <h1 class="detail-heading">{{ car.name }}</h1>
+
+            <span class="badge-info">Brand: {{ car.brand }}</span>
+            <span class="badge-info">Fuel: {{ car.fuel_type }}</span>
+            <span class="badge-info">Seats: {{ car.seats }}</span>
+
+            <p class="price-box">Price per day: ₹{{ car.price }}</p>
+
+            <p class="mt-3">{{ car.description }}</p>
+
+            {% if car.available %}
+                <div class="text-center">
+                    <a href="{% url 'booking' car.id %}" class="btn btn-dark book-btn">Book Now</a>
+                     <a href="/home" class="btn btn-dark book-btn">Back to Home</a>
+                     <a href="/ourcars" class="btn btn-dark book-btn">See Other Car's</a>
+                </div>
+
+            {% else %}
+                <button class="btn btn-secondary book-btn" disabled>Not Available</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<style>
+        body {
+
+            background: #f8f9fa;
+        }
+        .booking-card {
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 60px;
+            margin-bottom: 15px;
+            background: #fff;
+        }
+        .status-paid {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5" style="text-align: center; padding-top: 50px;">
+    <h2 class="mb-4">My Bookings</h2>
+
+    {% if bookings %}
+        {% for booking in bookings %}
+            <div class="booking-card">    
+            {% if booking.car.cimage %}
+                <img src="{{ booking.car.cimage.url }}" alt="{{ booking.car.name }}" style="width:200px; height:auto; border-radius:8px; margin-bottom:10px;">
+            {% endif %}
+                <p><strong>Car:</strong> {{ booking.car.name }}</p>
+                <p><strong>Pickup Date:</strong> {{ booking.pickup_datetime }}</p>
+                <p><strong>Drop Date:</strong> {{ booking.drop_datetime }}</p>
+                <p><strong>No of Days:</strong> {{ booking.no_of_days }}</p>
+                <p class="status-paid">Status: Paid</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You don’t have any confirmed bookings yet.</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to Home</a>
+</div>
+
+
+{% endblock %}

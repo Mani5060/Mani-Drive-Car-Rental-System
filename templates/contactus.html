@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+  <style>
+    body {
+      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      background-color: #f4f6f8;
+      font-family: 'Segoe UI', sans-serif;
+}
+.login-box {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 400px;
+      margin: 100px 150px 100px auto;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-title {
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #343a40;
+    }
+
+    .form-control {
+      border-radius: 8px;
+    }
+
+    .btn-primary {
+      border-radius: 8px;
+      padding: 10px;
+    }
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f1f1;
+  padding: 50px;
+  position: relative;
+}
+</style>
+
+<div class="container py-5">
+  <div class="row align-items-center">
+    <!-- Left: Text Section -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <h1 class="display-5 fw-bold">Mani's <span class="text-warning">DRIVE'S</span><br>CAR RENTAL PUNE</h1>
+      <p class="lead">Safe | Reliable | Affordable</p>
+       <h3 class="text-warning">Contact Us</h3>
+        <p><b>Sky Avenue Shivar chowk Pimple Saudagar Pune 411027</b></p>
+        <p><b>8291995060 | 02200506050</b></p>
+    </div>
+
+    <!-- Right: Form Section -->
+    <div class="col-md-6">
+      <div class="login-box">
+        <h3 class="mb-4 text-center fw-bold">For Any Query</h3>
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" name="fname" class="form-control" id="fullName" placeholder="Enter your Full Name">
+          </div>
+          <div class="mb-3">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input type="tel" name="mobile" class="form-control" id="contactNumber" placeholder="Enter your Mobile Number">
+          </div>
+          <div class="mb-3">
+            <label for="city"  class="form-label">City</label>
+            <input type="text" name="city" class="form-control" id="city" placeholder="Enter your City">
+          </div>
+          <button type="submit" class="btn btn-dark w-100">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock 'main' %}

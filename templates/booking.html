@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 40px;
+}
+
+.container {
+  margin-top: 50px;
+  max-width: 800px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.section-title {
+  font-weight: bold;
+  text-align: center;
+  color: #080808;
+  margin-bottom: 20px;
+}
+
+.car-details {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.car-details img {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.car-info h3 {
+  font-weight: bold;
+  margin: 0;
+  color: #080808;
+}
+
+.car-info p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.booking-form {
+  display: grid;
+  gap: 15px;
+}
+
+.booking-form input,
+.booking-form button {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.booking-form label {
+  text-align: left;
+  color: #555;
+  font-size: 14px;
+}
+
+.booking-form button {
+  background: grey;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.booking-form button:hover {
+  background: black;
+}
+</style>
+
+<div class="container">
+  <h2 class="section-title">Car Details</h2>
+  <div class="car-details">
+    {% if car.cimage %}
+      <img src="{{ car.cimage.url }}" alt="{{ car.name }}" style="width: 400px;">
+    {% endif %}
+    <div class="car-info">
+      <h3>{{ car.name }}</h3>
+      <p style="font-weight: bolder;">{{ car.brand }}</p>
+      <p style="font-weight: bolder; color: rgb(12, 12, 12);">Price per Day: ₹ {{ car.price }}</p>
+      <p style="color: rgb(12, 12, 12); font-weight: bold;">⛽Fuel: {{ car.fuel_type }}</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Book This Car</h2>
+  <form class="booking-form" method="POST" action="{% url 'booking' car.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if errmsg %}
+    <div class="alert alert-danger" role="alert">
+        {{errmsg}}
+    </div>
+    {% endif %}
+    <input type="text" name="customer_name" placeholder="Your Name *" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="text" name="license_no" placeholder="License No." required>
+    <input type="text" name="address" placeholder="Full Address" required>
+    <label>
+    <input type="date" id="pickup" name="pickup_date" placeholder="Pickup Date & Time" required>
+    </label>
+    <label>
+    <input type="date" id="drop" name="drop_date" placeholder="Drop Date & Time" required>
+    </label>
+    <input type="text" name="pickup_location" placeholder="Pickup Location" required>
+
+    <label style="font-weight: bold;">Upload License
+      <input type="file" name="license_file" required>
+    </label>
+
+    <label style="font-weight: bold;">Upload Aadhaar Card
+      <input type="file" name="aadhaar_file">
+    </label>
+
+    <button type="submit">Review Booking</button>
+  </form>
+</div>
+<script>
+  let today = new Date().toISOString().split("T")[0];
+
+  document.getElementById("pickup").setAttribute("min", today);
+  document.getElementById("drop").setAttribute("min", today);
+</script>
+
+{% endblock %}

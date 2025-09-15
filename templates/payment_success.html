@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<style>
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #f9fff9;
+    border: 2px solid #4CAF50;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+h2 { color: #4CAF50; margin-bottom: 20px; }
+p { font-size: 16px; color: #333; margin: 8px 0; }
+.btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    margin-top: 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.btn:hover { background-color: #45a049; }
+</style>
+
+<div class="container">
+    <h2>🎉 Payment Successful!</h2>
+    <p><strong>Payment ID:</strong> {{ payment_id }}</p>
+    <p><strong>Car:</strong> {{ booking.car.name }}</p>
+    <p><strong>Pickup Date:</strong> {{ booking.pickup_datetime }}</p>
+    <p><strong>Drop Date:</strong> {{ booking.drop_datetime }}</p>
+    <p><strong>No. of Days:</strong> {{ booking.no_of_days }}</p>
+    <p><strong>Total Paid:</strong> ₹{{ final_amount }}</p>
+    <h4> Our Team Will Contact You Shortly For More Details</h4>
+    <a href="{% url 'my_bookings' %}" class="btn">View My Bookings</a>
+</div>
+
+{% endblock %}

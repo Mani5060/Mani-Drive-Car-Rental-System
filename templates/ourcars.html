@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+
+  <style>
+    body {
+      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      background-color: #f4f6f8;
+      font-family: 'Segoe UI', sans-serif;
+}
+
+    .card.car-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      height: 100%;
+      width: 100%;
+    }
+
+    .card.car-card:hover {
+      transform: scale(1.01);
+    }
+
+    .car-img {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .car-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .car-info {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: #555;
+    }
+
+    .price {
+      color: #28a745;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .btn-book {
+      background-color: #343a40;
+      color: white;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+
+    .btn-book:hover {
+      background-color: #000;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid my-5 g-3">
+  <div class="row g-3">
+
+
+    <div class="col-md-3 px-0">
+      <div class="bg-white p-3 shadow-sm rounded">
+        <h5 class="fw-bold">Filter by Category</h5>
+        <hr>
+        <a href="/ourcars" class="d-block text-decoration-none mb-1">All</a>
+        <a href="/catfilter/suv" class="d-block text-decoration-none mb-1">SUV</a>
+        <a href="/catfilter/hatchback" class="d-block text-decoration-none mb-1">Hatchback</a>
+        <a href="/catfilter/sedan" class="d-block text-decoration-none mb-1">Sedan</a>
+        <a href="/catfilter/van" class="d-block text-decoration-none mb-3">Van/Minivan</a>
+
+        <h5 class="fw-bold mt-4">Sort by Price</h5>
+        <hr>
+        <a href="/sortfilter/0" class="d-block text-decoration-none mb-1">High To Low</a>
+        <a href="/sortfilter/1" class="d-block text-decoration-none mb-3">Low To High</a>
+
+        <h5 class="fw-bold mt-4">Filter By Price</h5>
+        <hr>
+        <form action="/pricefilter" method="get">
+          <div class="mb-2">
+            <label for="min" class="form-label">Min</label>
+            <input type="text" name="min" class="form-control" id="min">
+          </div>
+          <div class="mb-2">
+            <label for="max" class="form-label">Max</label>
+            <input type="text" name="max" class="form-control" id="max">
+          </div>
+          <input type="submit" value="Filter" class="btn btn-dark mt-2 w-100">
+        </form>
+      </div>
+    </div>
+
+
+     <div class="col-md-9">
+      <div class="row g-3">
+        {% for i in data %}
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 d-flex">
+          <div class="card car-card w-100">
+            <img src="{{i.cimage.url}}" class="car-img card-img-top" alt="{{ i.name }}">
+            <div class="card-body p-2">
+              <div class="car-title text-center">{{i.name}}</div>
+              <div class="price text-success">₹ {{i.price}}</div>
+              <div class="car-brand">{{i.brand}}</div>
+              <div class="category">{{ i.category }}</div>
+              <div class="car-info text-dark fw-bold">
+                ⛽Fuel: {{ i.fuel_type }}<br>
+                ⚙ Transmission: {{ i.transmission }}
+              </div>
+              <div class="seats">🪑 {{ i.seats }} Seater</div>
+              <a href="{% url 'car_detail' i.id %}" class="btn btn-dark mt-2 w-100">See Details</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  
+{% endblock %}
+

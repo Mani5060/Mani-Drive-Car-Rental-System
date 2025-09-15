@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+  <style>
+    body {
+      background-image: -webkit-repeating-radial-gradient();
+      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      background-color: #f4f6f8;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 400px;
+      margin: 100px auto;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-title {
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #343a40;
+    }
+
+    .form-control {
+      border-radius: 8px;
+    }
+
+    .btn-primary {
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .register-link {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4 py-3 fixed-top">
+    <div class="container-fluid">
+     <img src="{% static 'images/Logo.png' %}" alt="Logo" style="height: 30px; margin-right: 8px; vertical-align: middle;"><b>Mani's</b>
+     <span style="color: orange;"><b> Drive's</b></span>
+</a>
+      <ul class="navbar-nav ms-auto d-flex flex-row gap-4 align-items-center">
+        <li class="nav-item"><a class="nav-link" href="/home"><b>Home</b></a></li>
+        <li class="nav-item"><a class="nav-link" href="/ourcars"><b>Our Car's</b></a></li>
+        <li class="nav-item"><a class="nav-link" href="/contactus"><b>Contact Us</b></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 🚪 Login Form Section -->
+  <div class="login-box">
+    
+  {% if successmsg %}
+    <div class="alert alert-success" role="success">
+      {{ successmsg }}
+    </div>
+  {% endif %}
+  <h3 class="text-center login-title">Login to Your Account</h3>
+
+  {% if errmsg %}
+    <div class="alert alert-danger" role="alert">
+      {{ errmsg }}
+    </div>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+    </div>
+    <div >
+      <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+    </div>
+
+    <button type="submit" class="btn btn-dark w-100">Login</button>
+  </form>
+
+  <div class="text-center register-link">
+    <small>Don't have an account? <a href="{% url 'register' %}">Register here</a></small>
+  </div>
+</div>
+
+{% endblock %}
+ 
